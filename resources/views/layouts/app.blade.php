@@ -64,6 +64,11 @@
                     </form>
                 </div>
             </div>
+            <div id="shopping_cart_button">
+                <button class="btn btn-primary">Shopping cart &bigtriangledown;</button>
+
+                <div id="shopping_cart" class="position-absolute bg-light p-3 border" style="display: none"></div>
+            </div>
         </div>
     </header>
 
@@ -99,5 +104,50 @@
 
 </div>
 
+<script>
+
+    let shoppingCartProducts = [];
+
+    if (localStorage.getItem('cart_items') !== null) {
+        shoppingCartProducts = JSON.parse(localStorage.getItem('cart_items'));
+        updateCart();
+    }
+
+    function addProductToCart(product) {
+        if (product.classList.contains('newsletter_button')) {
+            product = product.parentElement
+        }
+        if (shoppingCartProducts.indexOf(product) === -1) {
+            shoppingCartProducts.push({id: product.id, name: product.attributes['data-title'].value})
+        }
+        localStorage.setItem('cart_items', JSON.stringify(shoppingCartProducts));
+        updateCart();
+    }
+
+    document.querySelectorAll('.product_buttons').forEach((element) => {
+        element.addEventListener('click', (element) => addProductToCart(element.target))
+    });
+
+    document.querySelector('#shopping_cart_button').addEventListener('click', () => {
+        let shopping_cart = document.querySelector('#shopping_cart');
+        if (shopping_cart.style.display === 'block') {
+            shopping_cart.style.display = "none";
+        } else {
+            shopping_cart.style.display = "block";
+        }
+        updateCart()
+    })
+    function updateCart() {
+        let shopping_cart = document.querySelector('#shopping_cart');
+        shopping_cart.innerHTML = "";
+        if (shoppingCartProducts.length) {
+            shoppingCartProducts.forEach(product => {
+                shopping_cart.innerHTML += '<div class="border-bottom p-1">' + product['name'] + '</div>';
+            })
+        } else {
+            shopping_cart.innerHTML = "Winkelwagen is leeg.";
+        }
+    }
+</script>
 </body>
 </html>

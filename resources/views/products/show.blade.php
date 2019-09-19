@@ -28,7 +28,8 @@
                         </div>
                         <div class="product_buttons">
                             <div class="text-right d-flex flex-row align-items-start justify-content-start">
-                                <div class="w-100 product_button product_cart text-center d-flex flex-column align-items-center justify-content-center ">
+                                <div class="w-100 product_button product_cart text-center d-flex flex-column align-items-center justify-content-center "
+                                     data-title="{{$product->name}}" id="{{$product->id}}">
                                     <div class="newsletter_button position-relative">+</div>
                                 </div>
                             </div>
