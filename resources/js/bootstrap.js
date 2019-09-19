@@ -11,6 +11,9 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    require('./plugins/OwlCarousel2-2.2.1/owl.carousel');
+    require('./bootstrap_theme/custom');
+    // require('bootstrap_theme/cart');
 } catch (e) {}
 
 /**

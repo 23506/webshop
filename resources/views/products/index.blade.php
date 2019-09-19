@@ -1,27 +1,51 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.app')
 
+@section('title')
+    Producten
+@endsection
 
-<h1>Producten</h1>
-<div class="row">
-    @foreach($products as $product)
-        <div class="col-12 col-md-6 col-xl-4">
-            <div class="bg-primary border border-dark p-1 m-1">
-                <h1>{{$product->name}}</h1>
-                <h3>{{$product->price}}</h3>
+@section('content')
+    <div class="products">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section_title text-center">Laatste games</div>
+                </div>
+            </div>
+            <div class="row products_row">
+
+            @foreach($products as $product)
+                <!-- Product -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="product">
+                            <div class="product_image p-3"><img src="http://images.pushsquare.com/44d8c567ed72a/cyberpunk-2077s-cover-featuring-male-v.large.jpg" alt=""></div>
+                            <div class="product_content">
+                                <div class="product_info d-flex flex-row align-items-start justify-content-start">
+                                    <div>
+                                        <div>
+                                            <div class="product_name"><a
+                                                        href="{{route('products.show', $product)}}">{{$product->name}}</a>
+                                            </div>
+                                            <div class="product_category">{{$product->studio}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="ml-auto text-right">
+                                        <div class="product_price text-right">&euro;{{$product->getPrice()}}</div>
+                                    </div>
+                                </div>
+                                <div class="product_buttons">
+                                    <div class="text-right d-flex flex-row align-items-start justify-content-start">
+                                        <div class="w-100 product_button product_cart text-center d-flex flex-column align-items-center justify-content-center ">
+                                            <div class="newsletter_button position-relative">+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                @endforeach
             </div>
         </div>
-    @endforeach
-</div>
-
-</body>
-</html>
+    </div>
+@endsection
