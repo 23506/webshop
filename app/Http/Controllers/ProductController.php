@@ -19,6 +19,13 @@ class ProductController extends Controller
     }
 
 
+    public function adminIndex()
+    {
+        $products = Product::all();
+        return view('admin/index')->with(compact('products'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -26,7 +33,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/create');
     }
 
     /**
@@ -37,7 +44,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = Product::create($request->toArray());
+        return redirect(route('products.edit', $product));
     }
 
     /**
@@ -59,7 +67,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin/edit')->with(compact('product'));
     }
 
     /**
@@ -71,7 +79,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->toArray());
+        return redirect(route('products.edit', $product));
     }
 
     /**
