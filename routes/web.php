@@ -14,4 +14,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::patch('products/{product}/update', 'ProductController@update')->name('products.update');
     Route::get('products/create', 'ProductController@create')->name('products.create');
     Route::post('products/store', 'ProductController@store')->name('products.store');
+    Route::get('products/{product}/delete', 'ProductController@destroy')->name('products.delete');
 });

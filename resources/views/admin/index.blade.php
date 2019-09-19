@@ -5,13 +5,19 @@
         <thead>
         <tr>
             <th>Naam</th>
+            <th>Studio</th>
+            <th>Prijs</th>
+            <th></th>
             <th></th>
         </tr>
         </thead>
         @foreach($products as $product)
             <tr>
                 <td>{{$product->name}}</td>
-                <td><a href="{{route('products.edit', $product)}}">Bekijk</a></td>
+                <td>{{$product->studio}}</td>
+                <td>&euro;{{$product->getPrice()}}</td>
+                <td class="text-right"><a href="{{route('products.edit', $product)}}">Bekijk product</a></td>
+                <td class="text-right"><a href="{{route('products.delete', $product)}}" class="text-danger">Verwijder product</a></td>
             </tr>
 
         @endforeach
